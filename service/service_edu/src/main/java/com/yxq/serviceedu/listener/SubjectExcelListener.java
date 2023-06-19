@@ -11,10 +11,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 import java.util.Map;
 
+/**
+ * 不能交给spring管理，需要我们手动创建对象
+ */
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
+    //不能实现数据库操作，我们自己注入service
     public EduSubjectService eduSubjectService;
 
+    //利用构造注入的方式注入service
     public SubjectExcelListener(EduSubjectService eduSubjectService) {
         this.eduSubjectService = eduSubjectService;
     }
@@ -22,22 +27,27 @@ public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
     public SubjectExcelListener() {
     }
 
+    //一行一行的读取记录
     @Override
     public void invoke(SubjectData subjectData, AnalysisContext analysisContext) {
+        //如果excel中没有数据，抛出异常
         if (subjectData == null) {
             throw new GuliException(20001, "文件数据为空");
         }
+        //一行一行读，每次读取有两个值，第一个值以及分类，第二个值二级分类
         //判断一级分类
         EduSubject oneSubject = this.existOneSubject(eduSubjectService, subjectData.getOneSubjectName());
         if (oneSubject == null) {//没有相同的一级分类，进行添加
             oneSubject = new EduSubject();
+            //真正要传入的数据
             oneSubject.setParentId("0");
             oneSubject.setTitle(subjectData.getOneSubjectName());
+            //service调用dao层实现数据持久化
             eduSubjectService.save(oneSubject);
         }
 
         //判断二级分类
-        String pid = oneSubject.getId();
+        String pid = oneSubject.getId(); //
         EduSubject twoSubject = this.existTwoSubject(eduSubjectService, subjectData.getTwoSubjectName(), pid);
         if (twoSubject == null) {//没有相同的一级分类，进行添加
             twoSubject = new EduSubject();

@@ -30,9 +30,11 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
 
     @Override
     public String login(UcenterMember member) {
+        //获取登录手机号和密码
         String mobile = member.getMobile();
         String password = member.getPassword();
 
+        //手机号和密码非空的判断
         if(StringUtils.isEmpty(mobile) || StringUtils.isEmpty(password)){
             throw new GuliException(20001,"登录失败");
         }
@@ -47,6 +49,11 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new GuliException(20001,"登录失败");
         }
 
+        // 可以判断是否被禁用
+        if(mobileMember.getIsDisabled()) {
+            throw new GuliException(20001,"登录失败");
+        }
+
         //判断密码
         //因为存到数据库的密码是加密过后的
         //把输入的密码进行加密，再和数据库密码进行比较
@@ -54,8 +61,9 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
             throw new GuliException(20001,"登录失败");
         }
 
+
         //登录成功
-        //生成token字符串，使用jwt工具类
+        // 通过用户id和用户名生成token字符串，使用jwt工具类
         String jwtToken = JwtUtils.getJwtToken(mobileMember.getId(), mobileMember.getNickname());
 
 
@@ -82,7 +90,7 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         if(!code.equals(redisCode)) {
             throw new GuliException(20001,"注册失败");
         }
-        //判断手机号是否存在
+        //判断手机号是否存在，如果存在就不能注册
         QueryWrapper<UcenterMember> wrapper = new QueryWrapper<>();
         wrapper.eq("mobile",mobile);
         Integer count = baseMapper.selectCount(wrapper);

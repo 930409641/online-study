@@ -4,13 +4,16 @@ import com.yxq.commonutils.R;
 import com.yxq.servicebase.exceptionhandler.GuliException;
 import com.yxq.serviceedu.client.VodClient;
 import com.yxq.serviceedu.entity.EduVideo;
+import com.yxq.serviceedu.entity.vo.VideoInfoForm;
 import com.yxq.serviceedu.mapper.EduVideoMapper;
 import com.yxq.serviceedu.service.EduVideoService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +61,30 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
         baseMapper.delete(queryWrapper);
     }
 
+    // 根据创获取小节信息
+    @Override
+    public VideoInfoForm getVideoInfoById(String id) {
+        EduVideo eduVideo = baseMapper.selectById(id);
+        if(StringUtils.isEmpty(eduVideo)) {
+            throw new GuliException(20001,"数据不存在");
+        }
 
+        //创建VideoInfoForm对象
+        VideoInfoForm videoInfoForm = new VideoInfoForm();
+        BeanUtils.copyProperties(eduVideo,videoInfoForm);
+        return videoInfoForm;
+    }
+
+    @Override
+    public Integer updateVideoInfoById(VideoInfoForm videoInfoForm) {
+        //创建一个Video
+        EduVideo eduVideo = new EduVideo();
+        //将videoInfoForm中的数据封装到video中
+        BeanUtils.copyProperties(videoInfoForm,eduVideo);
+
+        //根据id更新video
+        int i = baseMapper.updateById(eduVideo);
+
+        return i;
+    }
 }

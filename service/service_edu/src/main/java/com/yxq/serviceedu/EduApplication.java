@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableFeignClients    //服务调用
 @EnableDiscoveryClient  //nacos注册
-@ComponentScan(basePackages = {"com.yxq"})
+@ComponentScan(basePackages = {"com.yxq"}) //扫描依赖的jar包 common中的service_base
 @SpringBootApplication
-@MapperScan(basePackages = {"com.yxq.serviceedu.mapper"})
+@MapperScan(basePackages = {"com.yxq.serviceedu.mapper"}) //扫描到mapper接口，实现动态代理
 public class EduApplication {
 
     public static void main(String[] args) {

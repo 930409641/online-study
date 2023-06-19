@@ -19,6 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * 转码模版
+ *
+ */
 @Service
 @Slf4j
 public class VodServiceImpl implements VodService {

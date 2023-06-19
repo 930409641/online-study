@@ -36,11 +36,11 @@ public class OssServiceImpl implements OssService {
 
             //在文件名称里面添加随机唯一的值
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
-            fileName = uuid+fileName;
+            fileName = uuid+fileName; //多此上传同样名字文件，会覆盖之前的文件
 
             //获取当前日期
-            String datePath = new DateTime().toString("yyyy/MM/dd");
-            fileName = datePath+"/"+fileName;
+            String datePath = new DateTime().toString("yyyy/MM/dd"); //时间工具类
+            fileName = datePath+"/"+fileName; //按照日期进行分类存储
 
             //调用oss方法实现上传
             //第一个参数 Bucket名称

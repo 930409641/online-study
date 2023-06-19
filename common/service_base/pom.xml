@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>com.yxq</groupId>
-            <artifactId>common-utils</artifactId>
+            <artifactId>common-utils</artifactId> <!--为了使用通用返回类型-->
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

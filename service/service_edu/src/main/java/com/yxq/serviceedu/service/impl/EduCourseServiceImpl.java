@@ -51,7 +51,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     //添加课程信息
     @Override
     public String saveCourseInfo(CourseInfoVo courseInfoVo) {
-        //向课程表添加课程信息
+        //向课程表添加课程信息，从CourseInfoVo获取课程信息，封装到EduCourse
         EduCourse eduCourse = new EduCourse();
         BeanUtils.copyProperties(courseInfoVo, eduCourse);
         int insert = baseMapper.insert(eduCourse);
@@ -60,7 +60,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         }
         //获取保存后的id，与课程描述建立关系
         String CourseId = eduCourse.getId();
-        //向课程简介添加课程简介
+        //向课程简介添加课程简介 ，从CourseInfoVo中获取描述信息封装到EduCourseDescription
         EduCourseDescription description = new EduCourseDescription();
         BeanUtils.copyProperties(courseInfoVo, description);
         description.setId(CourseId);

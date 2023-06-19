@@ -41,6 +41,7 @@ public class EduCourseController {
         return R.ok().data("list", list);
     }
 
+    //添加课程基本信息
     @PostMapping("addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
 //        System.out.println("11111111111");

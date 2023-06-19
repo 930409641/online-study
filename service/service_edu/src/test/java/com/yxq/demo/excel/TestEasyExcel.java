@@ -14,9 +14,11 @@ public class TestEasyExcel {
         //String filename = "F:/write.xlsx";
         //调用easyexcel里面的方法实现写操作
         //write方法两个参数，
+        String filename = "F:/write.xlsx";
+
         //EasyExcel.write(filename,DemoData.class).sheet("学生列表").doWrite(getData());
 
-        String filename = "F:/write.xlsx";
+
         EasyExcel.read(filename,DemoData.class,new ExcelListener()).sheet().doRead();
     }
     //创建方法返回list集合

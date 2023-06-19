@@ -2,7 +2,7 @@ package com.yxq.serviceedu.entity.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
+//VO(view object)可视层对象,用于给前端显示的对象。(只传递有需要的参数以保障数据安全)
 @Data
 public class TeachQuery {
 

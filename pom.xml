@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
+    <modules> <!--子模块-->
         <module>service</module>
         <module>service/service_edu</module>
         <module>common</module>
@@ -10,7 +10,7 @@
         <module>canal_clientedu</module>
         <module>infrastructure</module>
     </modules>
-    <parent>
+    <parent> <!--创建父工程，pom类型 管理依赖版本和公共依赖-->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.1.RELEASE</version>

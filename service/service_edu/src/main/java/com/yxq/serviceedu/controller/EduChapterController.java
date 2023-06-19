@@ -65,7 +65,5 @@ public class EduChapterController {
             return R.error();
         }
     }
-
-
 }
 

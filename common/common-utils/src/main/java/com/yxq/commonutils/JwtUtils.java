@@ -28,7 +28,7 @@ public class JwtUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 .claim("id", id)   //设置token主体部分，存储用户信息
                 .claim("nickname", nickname)
-                .signWith(SignatureAlgorithm.HS256, APP_SECRET)
+                .signWith(SignatureAlgorithm.HS256, APP_SECRET) //根据秘钥和加密方式生成签名
                 .compact();
 
         return JwtToken;

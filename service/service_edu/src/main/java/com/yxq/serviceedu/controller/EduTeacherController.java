@@ -24,8 +24,8 @@ import java.util.List;
  * 讲师 前端控制器
  * </p>
  *
- * @author atguigu
- * @since 2020-08-02
+ * @author yxq
+ * @since 2022-01-02
  */
 @Api(description = "讲师管理")
 @RestController
@@ -35,6 +35,7 @@ public class EduTeacherController {
     @Autowired
     private EduTeacherService teacherService;
 
+    //查询所有讲师
     @ApiOperation(value = "所有讲师列表")
     @GetMapping("findAll")
     public R findAllTeacher() {
@@ -64,7 +65,7 @@ public class EduTeacherController {
 //        try {
 //            int i = 10 / 0;
 //        } catch (Exception e) {
-//            throw new GuliException(20001, "方法执行GuliException异常");
+//            throw new GuliException(20001, "方法执行GuliException异常");  执行自定义异常
 //        }
 
         //调用方法，把所有数据封装到pageTeacher中
@@ -124,7 +125,7 @@ public class EduTeacherController {
 
     @ApiOperation("添加教师")
     @PostMapping("addTeacher")
-    public R addTeacher(@RequestBody EduTeacher eduTeacher) {
+    public R addTeacher(@RequestBody EduTeacher eduTeacher) { //RequestBody
         boolean save = teacherService.save(eduTeacher);
         if (save) {
             return R.ok();
@@ -148,7 +149,5 @@ public class EduTeacherController {
         } else
             return R.error();
     }
-
-
 }
 

@@ -35,6 +35,7 @@ public class R {
         return r;
     }
 
+    //失败静态方法
     public static R error() {
         R r = new R();
         r.setSuccess(false);
@@ -42,7 +43,7 @@ public class R {
         r.setMessage("失败");
         return r;
     }
-
+    //下面是链式编程 this 代表当前调用者
     public R success(Boolean success){
         this.setSuccess(success);
         return this;

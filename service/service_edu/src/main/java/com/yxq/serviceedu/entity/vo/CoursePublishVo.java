@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+
+//课程发布视图
 @Data
 public class CoursePublishVo implements Serializable {
     private String id;

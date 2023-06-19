@@ -37,13 +37,20 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
         //获取输入流
         try {
             InputStream is = file.getInputStream();
-            EasyExcel.read(is, SubjectData.class, new SubjectExcelListener(eduSubjectService)).sheet().doRead();
+            EasyExcel.read(is, SubjectData.class, new SubjectExcelListener(eduSubjectService)).sheet().doRead(); //监听器中完成核心业务
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * 实现思路
+     * 1. 获取所有一级分类，封装到一个List集合中，再获取所有二级分类封装到一个List集合中
+     * 2. 封装一级分类，获取一级分类，根据每一个一级分类再遍历二级分类，获取这个一级分类中的二级分类，然后封装到一级分类的child属性当中
+     * 3. 依次遍历一级分类，重复2
+     * @return
+     */
     @Override
     public List<OneSubject> getAllOneTwoSubject() {
         //1查询出所有一级分类 parent_id=0

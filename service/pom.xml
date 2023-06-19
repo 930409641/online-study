@@ -31,7 +31,7 @@
         <!--自定义jar包-->
         <dependency>
             <groupId>com.yxq</groupId>
-            <artifactId>service_base</artifactId>
+            <artifactId>service_base</artifactId> <!--工具类-->
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

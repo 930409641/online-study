@@ -29,17 +29,17 @@ public class CodeGenerator {
         gc.setOutputDir("D:\\gulistudy\\guli_parent\\service\\service_edu" + "/src/main/java");
 
         gc.setAuthor("testjava"); //作者
-        gc.setOpen(false); //生成后是否打开资源管理器
+        gc.setOpen(false); //生成后是否打开资源管理器 将生成后的文件夹都打开
         gc.setFileOverride(false); //重新生成时文件是否覆盖
 
         gc.setServiceName("%sService");	//去掉Service接口的首字母I
-        gc.setIdType(IdType.ID_WORKER); //主键策略
+        gc.setIdType(IdType.ID_WORKER_STR); //主键策略
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
         gc.setSwagger2(true);//开启Swagger2模式
 
         mpg.setGlobalConfig(gc);
 
-        // 3、数据源配置
+        // 3、数据源配置 mp需要单独设置数据库信息，不能使用配置文件的数据库信息
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/guli?serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
